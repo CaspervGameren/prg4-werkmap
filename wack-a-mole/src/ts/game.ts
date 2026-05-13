@@ -1,6 +1,7 @@
 import '../css/style.css';
 import { Actor, Engine, Font, Label, Vector } from "excalibur";
 import { ResourceLoader, Resources } from './resources.ts';
+import Score from './classes/score.ts';
 
 export class Game extends Engine {
 
@@ -18,11 +19,7 @@ export class Game extends Engine {
     onInitialize(engine: Engine) {
         console.log("initializing game");
 
-        this.scoreLabel = new Label({
-            text: 'Score: 0',
-            pos: new Vector(this.drawWidth / 2, 25),
-            font: new Font({ size: 30 }),
-        });
+        this.scoreLabel = new Score(engine);
         this.add(this.scoreLabel);
     }
 

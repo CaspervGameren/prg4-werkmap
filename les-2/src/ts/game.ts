@@ -4,6 +4,7 @@ import { Resources, ResourceLoader } from './resources.ts'
 import Fish from './classes/fish.ts'
 import Shark from './classes/shark.ts'
 import Bubble from './classes/bubble.ts'
+import Background from './classes/background.ts'
 
 export class Game extends Engine {
 
@@ -17,16 +18,14 @@ export class Game extends Engine {
         this.start(ResourceLoader).then(() => this.startGame())
     }
 
+    onInitialize(engine: Engine): void {
+        const backgroundActor = new Background(engine)
+
+        this.add(backgroundActor);
+    }
+
     startGame() {
         console.log("start de game!")
-
-        const backgroundActor = new Actor({
-            x: this.screen.width / 2,
-            y: this.screen.height / 2,
-            width: this.screen.width,
-            height: this.screen.height
-        })
-        const backgroundImage = Resources.Water.toSprite()
         const shark = new Shark()
 
         for (let i = 0; i < 30; i++) {
@@ -34,17 +33,14 @@ export class Game extends Engine {
             this.add(bubble);
         }
 
-        backgroundActor.z = -99
-        backgroundActor.graphics.use(backgroundImage)
+
 
         for (let i = 0; i < 20; i++) {
             const fish = new Fish()
             this.add(fish)
         }
 
-        for (let actor of [backgroundActor, shark]) {
-            this.add(actor)
-        }
+        this.add(shark)
     }
 }
 
