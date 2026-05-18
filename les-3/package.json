@@ -1,5 +1,5 @@
 {
-  "name": "prg4-werkmap",
+  "name": "les-3",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,5 +11,8 @@
   "devDependencies": {
     "typescript": "~6.0.2",
     "vite": "^8.0.12"
+  },
+  "dependencies": {
+    "excalibur": "^0.32.0"
   }
 }

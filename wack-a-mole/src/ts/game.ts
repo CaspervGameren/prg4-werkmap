@@ -1,13 +1,10 @@
 import '../css/style.css';
 import { Actor, Engine, Font, Label, Vector } from "excalibur";
 import { ResourceLoader, Resources } from './resources.ts';
+import { Pile } from './classes/pile.ts';
 import Score from './classes/score.ts';
 
 export class Game extends Engine {
-
-    score = 0;
-    scoreLabel: any;
-
     constructor() {
         super({
             width: 1024,
@@ -16,44 +13,17 @@ export class Game extends Engine {
         this.start(ResourceLoader).then(() => this.startGame());
     }
 
-    onInitialize(engine: Engine) {
-        console.log("initializing game");
-
-        this.scoreLabel = new Score(engine);
-        this.add(this.scoreLabel);
-    }
-
     startGame() {
-        console.log("start de game!");
+        const scoreLabel = new Score(this);
+        this.add(scoreLabel);
 
         for (let i = 0; i < 10; i++) {
-            this.spawnPile();
+            this.add(new Pile(scoreLabel))
         }
     }
 
-    spawnPile() {
-        const pile = new Actor();
-        this.add(pile);
-        const isMole = Math.random() > 0.5;
 
-        if (isMole) {
-            pile.graphics.use(Resources.Mole.toSprite());
-        } else {
-            pile.graphics.use(Resources.DirtPile.toSprite());
-        }
-        pile.pos.x = Math.random() * this.drawWidth;
 
-        pile.pos.y = Math.random() * this.drawHeight;
-
-        pile.on('pointerdown', () => {
-            if (isMole) {
-                this.score++;
-            } else {
-                this.score--;
-            }
-            this.scoreLabel.text = `Score: ${this.score}`;
-        });
-    }
 }
 
 new Game();
