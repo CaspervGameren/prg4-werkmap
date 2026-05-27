@@ -1,6 +1,6 @@
 import { Engine, Keys, Vector } from "excalibur";
 import { Resources } from "../resources";
-import BaseActor from "./BaseActor";
+import BaseActor from "./baseActor";
 import Fish from "./fish";
 
 export default class Shark extends BaseActor {

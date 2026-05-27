@@ -1,6 +1,6 @@
 import { Engine, randomInRange, Vector } from "excalibur";
 import { Resources } from "../resources";
-import BaseActor from "./BaseActor";
+import BaseActor from "./baseActor";
 
 export default class Fish extends BaseActor {
     constructor() {
